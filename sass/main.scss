@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;600;700&display=swap');
+
+$button-icons: hsl(223, 87%, 63%);
+$shadow: hsl(223, 100%, 88%);
+$error: hsl(354, 100%, 66%);
+$h1: hsl(0, 0%, 59%);
+$span-paragraph: hsl(209, 33%, 12%);
+$fontSize: 20px;
+
+@function size($value){
+    @return $value * $fontSize;
+}
+
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+main{
+    min-height: 100vh;
+    font-size: size(1);
+    font-family: 'Libre Franklin',sans-serif;
+    display: flex;
+}
+@mixin sizes($width,$heigth) {
+    width: $width;
+    height: $heigth;
+}
+@mixin typography($margin-top,$color,$font-weigth) {
+    margin-top: $margin-top;
+    color: $color;
+    font-weight: $font-weigth;
+}
+@mixin inputs($border,$borderRadius,$font) {
+    border-radius: $borderRadius;
+    border: $border;
+    font-size: $font;
+}
+@mixin  align($justify,$align) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+.container{
+    @include align(center, none);
+    flex-wrap: wrap;
+    @media screen and (max-width: 599px){
+        margin: 3em 1em;
+        header{
+            h1{
+                font-size: size(1.3);
+            }
+            p{
+                font-size: size(0.7);
+            }
+        }
+        section{
+            img{
+                @include sizes(100%, 70%);
+            }
+        }
+        footer{
+            margin-top: -1em;
+        }
+    }
+    @media screen and (min-width: 600px){
+        margin: 3em;
+        header{
+            h1{
+                font-size: size(1.7);
+            }
+            p{
+                font-size: size(1);
+            }
+        }
+        section{
+            img{
+                @include sizes(100%, 70%);
+            }
+        }
+        footer{
+            margin-top: -2em;
+        }
+    }
+    @media screen and (min-width: 950px){
+        margin: 5em auto;
+        @include sizes(43em, 0);
+        header{
+            h1{
+                font-size: size(2.5);
+            }
+        }
+    }
+}
+header{
+   width: 85%;
+   text-align: center;
+   h1{
+        @include typography(1em, $h1, 300);
+        span{
+            @include typography(0,$span-paragraph, 700);
+        }
+    }
+    p{
+        @include typography(0.7em,none , 300);
+    }
+}
+form{
+    margin-top: 2.5em;
+    display: flex;
+    flex-wrap: wrap;
+    @media screen and (max-width: 599px){
+        @include sizes(100%, 8em);
+        input{
+            @include sizes(100%, 35%);
+        }
+        button{
+            @include sizes(100%, 35%);
+            margin-top: 10%;
+        }
+    }
+    @media screen and (min-width: 600px){
+        @include sizes(100%, 8em);
+        @include align(center,center);
+        input{
+            @include sizes(80%, 35%);
+        }
+        button{
+            @include sizes(80%, 35%);
+        }
+    }
+    @media screen and (min-width: 950px){
+        @include sizes(100%, 3.5em);
+        input{
+            @include sizes(65%, 100%);
+        }
+        button{
+            @include sizes(30%, 100%);
+        }
+    }
+    input{
+        @include inputs(1px solid $h1, 35px, 20px);
+        padding-left: 1.5em;
+        &:focus{
+            outline: none;
+        }
+    }
+    button{
+        margin-left: 2%;
+        @include inputs(none,35px , 20px);
+        @include typography(0, #fff, 600);
+        background: $button-icons;
+        cursor: pointer;
+        &:hover{
+            opacity: 0.7;
+        }
+    }
+    small{
+        @include typography(0.5em, $error, 600);
+        font-style: italic;
+        display: none;
+        @include sizes(100%, 20%);
+        margin: auto;
+    }
+}
+form.error small{
+    display: block;
+}
+form.error input{
+    border: 2px solid $error;
+}
+section{
+    img{
+        @include sizes(100%, 24.75em);
+        margin: 2.5em auto;
+    }
+}
+footer{
+    text-align: center;
+    margin-top: 3em;
+    img{
+        transform: scale(0.5);
+    }
+    small{
+        @include typography(2em,$h1 , 400);
+    }
+}
+.media{
+    @include align(space-evenly, none);
+    margin: 1.5em 0;
+    color: $button-icons;
+}
+.fac-icon,.twit-icon,.ins-icon{
+    @include sizes(1.7em, 1.7em);
+    @include inputs(0.5px solid $button-icons, 50%, none);
+    cursor: pointer;
+    @include align(center, center);
+    &:hover{
+        background: $button-icons;
+        color: #fff;
+    }
+}
